@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Raphael Kang | Plan the years before CPF LIFE</title>
+<meta name="description" content="Raphael Kang helps Singaporeans in their 50s plan the years before CPF LIFE can start.">
+<meta name="theme-color" content="#F5F8F6">
+<meta name="robots" content="noindex,nofollow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Raphael Kang | Plan the years before CPF LIFE">
+<meta property="og:description" content="CPF LIFE can start at 65. What pays you from 60? See your gap and your own number.">
+<meta property="og:url" content="https://raphael-kang-page.pages.dev/">
+<meta property="og:image" content="https://raphael-kang-page.pages.dev/assets/hero-portrait-raphael.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<!--
+  WHY THIS FILE IS BUILT THIS WAY (code is the context):
+  - Copy source of truth: .tmp/raphael-era-page/COPY.md v3 (approved by Fahim 1 Oct 2026). Change copy there first, then here.
+  - Design: Fahim's funnel laws. Centred, one idea per screen, numbers massive, body 18px (audience is 50+), two font families only.
+  - Brand: the client's own green #1F4E45 and gold #B8912E (from his current e-card), Poppins + Inter.
+  - Infographics are HTML/CSS, not SVG text: a wide SVG scales to 7px text on a phone (Raphael V2 lesson).
+  - Motion is IntersectionObserver driven and skipped under prefers-reduced-motion. Final numbers live in the HTML so no-JS shows the right value.
+  - Claims not yet confirmed by Raphael render only when their flag below is true. Never show a draft note on the page.
+-->
+<style>
+:root{
+  --bg:#F5F8F6; --surface:#FFFFFF; --ink:#15201C; --muted:#56655F; --line:#DCE5E0;
+  --green:#1F4E45; --green-deep:#173A33; --tint:#E9F1ED;
+  --gold:#B8912E; --gold-soft:#E0C77F; --gold-deep:#7A5C1E;
+  --amber:#E39A2D; --amber-soft:#F6D49A; --amber-ink:#8A4F00;
+  --r:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-bottom:110px}
+a,button,input,summary{touch-action:manipulation}
+.skip{position:absolute;left:-999px;top:8px;background:#fff;color:var(--green);padding:10px 14px;border-radius:8px;z-index:100;font-weight:600}
+.skip:focus{left:8px}
+body{font:400 18px/1.6 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg);text-align:center;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3,.lead,.plan-lines,.bridge,.adv-lines,blockquote.q,.bodynote{text-wrap:balance}
+p{text-wrap:pretty}
+h1,h2,h3,.display{font-family:Poppins,Inter,system-ui,sans-serif;font-weight:800;line-height:1.1;letter-spacing:-.01em;color:var(--green-deep)}
+h1{font-size:clamp(40px,11.4vw,64px)}
+h2{font-size:clamp(30px,7.4vw,46px)}
+h3{font-size:22px;line-height:1.25}
+.lead{font-size:clamp(19px,5vw,22px);line-height:1.55;color:var(--ink)}
+.eyebrow{font:700 13px/1.3 Poppins,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep)}
+.fine{font-size:14px;line-height:1.5;color:var(--muted)}
+.wrap{width:100%;max-width:720px;margin:0 auto;padding:0 20px}
+.screen{padding:64px 0;min-height:min(88vh,820px);display:flex;flex-direction:column;justify-content:center;position:relative}
+@supports (min-height:100svh){.screen{min-height:min(88svh,820px)}}
+.screen .wrap>*+*{margin-top:18px}
+.screen .wrap>.eyebrow{margin-top:0}
+.on-dark{background:var(--green);color:#fff}
+.on-dark h2,.on-dark h3{color:#fff}
+.on-dark .eyebrow{color:var(--gold-soft)}
+.on-dark .lead{color:#fff}
+.bg-white{background:#fff}.bg-tint{background:var(--tint)}
+
+/* progress + header */
+#progress{position:fixed;left:0;top:0;height:4px;width:0;background:linear-gradient(90deg,var(--gold),var(--amber));z-index:50}
+.top{padding:18px 20px 0;font:700 19px Poppins,sans-serif;color:var(--green);letter-spacing:.01em}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:60px;padding:14px 30px;border-radius:14px;background:var(--green);color:#fff;font:700 19px/1.2 Poppins,sans-serif;text-decoration:none;box-shadow:0 12px 28px -12px rgba(21,32,28,.5);transition:transform .2s ease,box-shadow .2s ease,background .2s ease;border:0;cursor:pointer}
+.btn:hover{transform:translateY(-2px);background:var(--green-deep)}
+.btn:active{transform:translateY(0)}
+.btn svg{width:22px;height:22px;flex:none}
+.btn.inv{background:#fff;color:var(--green);box-shadow:0 12px 30px -10px rgba(0,0,0,.45)}
+.btn.inv:hover{background:#F2F7F4}
+.btn.line{background:transparent;color:inherit;border:2px solid currentColor;box-shadow:none}
+.btn.line:hover{background:rgba(255,255,255,.12)}
+.note{font-size:14px;line-height:1.45;color:var(--muted);margin-top:10px}
+.on-dark .note{color:rgba(255,255,255,.75)}
+.cta-block{display:flex;flex-direction:column;align-items:center}
+.cta-block .note{margin-top:10px}
+.link-btn{display:inline-flex;align-items:center;min-height:48px;padding:0 14px;font-weight:600;color:inherit;text-underline-offset:4px}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.reveal.in{opacity:1;transform:none}
+
+/* HERO */
+.hero{padding-top:28px}
+.hero .wrap>*+*{margin-top:16px}
+.portrait{position:relative;width:min(58vw,230px);margin:6px auto 0}
+.portrait img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 12%;border-radius:24px;box-shadow:0 24px 50px -20px rgba(21,32,28,.5);background:var(--tint)}
+.badge{position:absolute;right:-38px;bottom:-30px;width:114px;height:114px;border-radius:50%;background:#fff;box-shadow:0 14px 30px -10px rgba(21,32,28,.45);display:grid;place-items:center}
+.badge svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.badge circle{fill:none;stroke-width:7}
+.badge .bg{stroke:var(--tint)}
+.badge .arc{stroke:var(--gold);stroke-linecap:round;stroke-dasharray:327;stroke-dashoffset:0;transition:stroke .5s ease}
+.badge.draw .arc{stroke-dashoffset:327;animation:arc 1.9s .3s ease forwards}
+@keyframes arc{to{stroke-dashoffset:0}}
+.badge.done .arc{stroke:var(--amber);stroke-dashoffset:0;animation:none}
+.badge .num{position:relative;font:800 36px/1 Poppins,sans-serif;color:var(--green-deep);font-variant-numeric:tabular-nums;display:flex;flex-direction:column;align-items:center}
+.badge .num small{font:600 11px/1 Inter,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.badge.done{animation:breathe 2.6s 1s ease-in-out 3}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+#heroAge.bump{animation:bump .3s ease}
+@keyframes bump{0%{transform:scale(1.25)}100%{transform:scale(1)}}
+.adviser-line{font-size:16px;line-height:1.45;color:var(--muted);font-weight:500}
+.adviser-line b{color:var(--green);font-weight:700}
+.proof{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:22px}
+.faces{display:flex}
+.faces img{width:48px;height:48px;border-radius:50%;object-fit:cover;border:3px solid var(--bg);margin-left:-12px;background:var(--tint)}
+.faces img:first-child{margin-left:0}
+.proof q{font-size:18px;line-height:1.45;color:var(--ink);max-width:30ch;quotes:"\201C" "\201D"}
+.proof small{display:block;color:var(--muted);font-size:14px;margin-top:2px}
+.scrollcue{display:block;margin:18px auto 0;width:28px;height:28px;border-right:3px solid var(--gold);border-bottom:3px solid var(--gold);transform:rotate(45deg);animation:cue 1.8s ease-in-out 4;opacity:.8}
+@keyframes cue{0%,100%{transform:translateY(0) rotate(45deg)}50%{transform:translateY(8px) rotate(45deg)}}
+
+/* TIMELINE (gap) */
+.gantt{position:relative;width:100%;max-width:560px;margin:30px auto 0;padding:54px 0 76px}
+.axiscap{position:absolute;left:0;right:0;top:0;font:600 13px/1 Poppins,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0}
+.layers .axiscap{color:rgba(255,255,255,.72)}
+.axis{position:absolute;left:0;right:0;top:26px;height:28px}
+.tick{position:absolute;top:0;transform:translateX(-50%);font:600 16px/1 Inter,sans-serif;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.tick:first-child{transform:none}.tick:last-child{transform:translateX(-100%)}
+.tick::after{content:"";position:absolute;left:50%;top:24px;width:2px;height:10px;background:var(--line)}
+.tick:first-child::after{left:1px}.tick:last-child::after{left:auto;right:1px}
+.tl{position:relative;height:58px;border-radius:12px;background:var(--tint);overflow:visible}
+.seg{position:absolute;top:0;bottom:0;display:flex;align-items:center;justify-content:center;font:700 16px/1 Poppins,sans-serif;color:#fff;overflow:hidden;white-space:nowrap}
+.seg.work{left:0;width:50%;justify-content:flex-start;padding-left:22px;background:var(--green);border-radius:12px 0 0 12px;clip-path:inset(0 100% 0 0);transition:clip-path 1.1s cubic-bezier(.6,.1,.2,1)}
+.seg.cpf{left:50%;width:50%;background:var(--green-deep);clip-path:polygon(0 0,calc(100% - 20px) 0,100% 50%,calc(100% - 20px) 100%,0 100%);opacity:0;transform:translateX(14px);transition:opacity .7s .9s ease,transform .7s .9s ease}
+.seg.gap{left:25%;width:25%;background:repeating-linear-gradient(135deg,var(--amber) 0 9px,var(--amber-soft) 9px 18px);opacity:0;transition:opacity .6s ease}
+.gantt.s1 .seg.work{clip-path:inset(0 0 0 0)}
+.gantt.s1 .seg.cpf{opacity:1;transform:none}
+.gantt.s2 .seg.work{clip-path:inset(0 50% 0 0)}
+.gantt.s2 .seg.gap{opacity:1;transition-delay:.7s;animation:gappulse 2.2s 1.8s ease-in-out 3}
+@keyframes gappulse{0%,100%{filter:none}50%{filter:brightness(1.12)}}
+.gaplabel{position:absolute;left:37.5%;top:calc(54px + 58px + 14px);transform:translateX(-50%);width:240px;font:700 16px/1.35 Inter,sans-serif;color:var(--amber-ink);opacity:0;transition:opacity .6s 1.3s ease}
+.gaplabel::before{content:"";position:absolute;left:50%;top:-12px;width:calc(100% - 140px);min-width:84px;height:8px;border:2px solid var(--amber);border-top:0;border-radius:0 0 6px 6px;transform:translateX(-50%)}
+.gantt.s2 .gaplabel{opacity:1}
+.bignum{font:800 clamp(72px,21vw,118px)/1 Poppins,sans-serif;color:var(--gold-deep);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.bignum small{font-size:.36em;letter-spacing:0;margin-left:.12em;color:var(--green-deep)}
+.biglabel{font-size:19px;color:var(--muted);margin-top:4px}
+
+/* SLIDERS */
+.card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:26px 22px;box-shadow:0 18px 40px -24px rgba(21,32,28,.35);max-width:560px;margin-left:auto;margin-right:auto;width:100%}
+.ctl + .ctl{margin-top:26px}
+.ctl label{display:block;font:600 17px Inter,sans-serif;color:var(--muted)}
+.ctl .val{font:800 clamp(26px,7vw,32px)/1.2 Poppins,sans-serif;color:var(--green-deep);margin:4px 0 10px;font-variant-numeric:tabular-nums}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:44px;background:transparent;cursor:pointer;--p:0%}
+input[type=range]::-webkit-slider-runnable-track{height:12px;border-radius:12px;background:linear-gradient(90deg,var(--gold) var(--p),var(--line) var(--p))}
+input[type=range]::-moz-range-track{height:12px;border-radius:12px;background:var(--line)}
+input[type=range]::-moz-range-progress{height:12px;border-radius:12px;background:var(--gold)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:36px;height:36px;border-radius:50%;background:#fff;border:5px solid var(--gold);margin-top:-12px;box-shadow:0 4px 12px rgba(21,32,28,.35)}
+input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:#fff;border:5px solid var(--gold);box-shadow:0 4px 12px rgba(21,32,28,.35)}
+input[type=range]:focus-visible{outline:3px solid var(--green);outline-offset:4px;border-radius:12px}
+.yb-wrap{margin-top:26px;padding-top:20px;border-top:1px solid var(--line)}
+.yb{display:grid;grid-template-columns:repeat(10,1fr);gap:6px}
+.yb i{height:30px;border-radius:7px;background:var(--tint);transition:background .3s ease,transform .3s ease}
+.yb i.on{background:var(--amber);transform:translateY(-3px)}
+.yb-cap{font-size:16px;color:var(--muted);margin-top:10px}
+.total{margin-top:22px}
+.total .bignum{color:var(--green-deep);font-size:clamp(56px,16.5vw,88px)}
+.total .bignum.pop{animation:popn .28s ease}
+@keyframes popn{0%{transform:scale(1.06)}100%{transform:none}}
+.sumline{font-size:19px;color:var(--ink);margin-top:6px}
+.bridge{font:700 clamp(24px,6.4vw,32px)/1.25 Poppins,sans-serif;color:var(--green-deep);max-width:20ch;margin-left:auto;margin-right:auto}
+
+/* LAYERS (dark) */
+.layers{position:relative;width:100%;max-width:560px;margin:28px auto 0;padding-top:56px}
+.layers .axis .tick{color:rgba(255,255,255,.8)}
+.layers .axis .tick::after{background:rgba(255,255,255,.35)}
+.stack{position:relative;margin-top:6px;padding-top:50px}
+.ext{position:absolute;left:50%;right:0;top:14px;height:26px;border-top:3px dashed var(--gold-soft);border-bottom:3px dashed var(--gold-soft);background:rgba(224,199,126,.12);opacity:0;transition:opacity .8s ease;-webkit-mask-image:linear-gradient(90deg,#000 30%,transparent);mask-image:linear-gradient(90deg,#000 30%,transparent)}
+.lrow{position:relative;height:58px;border-radius:12px;background:rgba(255,255,255,.1)}
+.blk{position:absolute;top:0;bottom:0;display:flex;align-items:center;justify-content:center;font:700 16px/1 Poppins,sans-serif;white-space:nowrap;overflow:hidden}
+.blk.cpf{left:50%;width:50%;background:#F5F8F6;color:var(--green-deep);clip-path:polygon(0 0,calc(100% - 20px) 0,100% 50%,calc(100% - 20px) 100%,0 100%);opacity:0;transform:translateX(18px);transition:opacity .7s ease,transform .8s ease}
+.blk.si{left:25%;width:25%;background:var(--amber);color:var(--green-deep);border-radius:12px 0 0 12px;opacity:0;transform:translateX(-14px);transition:opacity .7s ease,transform .7s ease}
+.layers.l1 .blk.cpf{opacity:1;transform:none}
+.layers.l2 .blk.si{opacity:1;transform:none}
+.layers.l3 .ext{opacity:1}
+.legend{display:grid;gap:12px;margin:26px auto 0;max-width:520px;text-align:left}
+.legend div{display:flex;gap:14px;align-items:center;font-size:17px;line-height:1.4}
+.legend i{flex:none;width:30px;height:22px;border-radius:6px}
+.legend .k1{background:#F5F8F6}.legend .k2{background:var(--amber)}.legend .k3{height:18px;border-radius:0;border-top:3px dashed var(--gold-soft);border-bottom:3px dashed var(--gold-soft);background:rgba(224,199,126,.12)}
+.legend div{opacity:.55;transition:opacity .6s ease}
+.layers.l1 .legend .d1,.layers.l2 .legend .d2,.layers.l3 .legend .d3{opacity:1}
+.plan-lines{font-size:clamp(20px,5.2vw,24px);line-height:1.5;font-weight:500}
+.plan-lines .ln{display:block;text-wrap:balance}
+.plan-lines .ln+.ln{margin-top:10px}
+.plan-lines .sm{font-size:18px;opacity:.85;margin-top:2px}
+.plan-lines b{color:var(--gold-soft);font-weight:700}
+.riskline{font-size:18px;font-weight:600;color:#fff;background:rgba(255,255,255,.1);border-radius:14px;padding:14px 18px;max-width:560px;margin-left:auto;margin-right:auto}
+details{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:16px;text-align:left;max-width:560px;margin:12px auto 0;overflow:hidden}
+summary{list-style:none;cursor:pointer;min-height:60px;padding:16px 56px 16px 20px;font:600 18px/1.35 Poppins,sans-serif;position:relative;display:flex;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:20px;top:50%;width:28px;height:28px;margin-top:-14px;font:500 30px/28px Inter,sans-serif;text-align:center;color:var(--gold-soft);transition:transform .25s ease}
+details[open] summary::after{transform:rotate(45deg)}
+.dbody{padding:0 20px 20px;font-size:17px;line-height:1.55}
+.dbody p+p{margin-top:12px}
+.dbody strong{color:var(--gold-soft)}
+summary:focus-visible{outline:3px solid var(--gold-soft);outline-offset:-3px}
+
+/* CLIENTS */
+.yt{position:relative;display:block;width:100%;max-width:560px;margin:0 auto;aspect-ratio:16/9;border-radius:20px;overflow:hidden;background:#000;box-shadow:0 18px 40px -22px rgba(21,32,28,.6)}
+.yt img{width:100%;height:100%;object-fit:cover;opacity:.92}
+.yt .play{position:absolute;right:16px;bottom:16px;display:block;border:0;background:none;padding:0;cursor:pointer}
+.yt .play span{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.95);display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.35);transition:transform .2s}
+.yt .play:hover span{transform:scale(1.07)}
+.yt .play:focus-visible{outline:3px solid #fff;outline-offset:4px;border-radius:50%}
+.yt .play svg{width:26px;height:26px;margin-left:4px;fill:var(--green)}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+blockquote.q{font:600 clamp(21px,5.6vw,24px)/1.4 Poppins,sans-serif;color:var(--green-deep);max-width:30ch;margin-left:auto;margin-right:auto}
+blockquote.q::before{content:"";display:block;width:44px;height:33px;margin:0 auto 14px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 36'%3E%3Cpath fill='%23B8912E' d='M0 36V21.6C0 9.6 6.6 2.4 18 0l1.8 5.4C13.2 7.8 10.2 12 10.2 18H19.2V36H0zm27.6 0V21.6C27.6 9.6 34.2 2.4 45.6 0L47.4 5.4C40.8 7.8 37.8 12 37.8 18H46.8V36H27.6z'/%3E%3C/svg%3E") center/contain no-repeat}
+.who{font:500 15px/1.4 Inter,sans-serif;color:var(--muted);margin-top:8px}
+.qcard{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;align-items:start;text-align:left;background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px;max-width:560px;margin-left:auto;margin-right:auto;width:100%;box-shadow:0 14px 30px -24px rgba(21,32,28,.5)}
+.qcard .mono{grid-row:1/3;width:54px;height:54px;border-radius:50%;background:var(--tint);color:var(--green);font:700 18px/1 Poppins,sans-serif;display:grid;place-items:center;border:2px solid var(--gold-soft);object-fit:cover}
+.qcard blockquote{font:600 20px/1.42 Poppins,sans-serif;color:var(--green-deep)}
+.qcard figcaption{font:500 15px/1.4 Inter,sans-serif;color:var(--muted)}
+.on-dark blockquote.q{color:var(--gold-soft)}
+.on-dark .who{color:rgba(255,255,255,.75)}
+.carousel{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 20px 22px;margin-left:-20px;margin-right:-20px;scroll-padding:0 20px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.carousel::-webkit-scrollbar{display:none}
+.story{flex:0 0 80%;max-width:310px;scroll-snap-align:start;background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;text-align:left;box-shadow:0 14px 30px -22px rgba(21,32,28,.5)}
+.story img{width:100%;aspect-ratio:16/10;object-fit:cover;background:var(--tint)}
+.story .sb{padding:16px 18px 20px}
+.story h4{font:800 20px/1.25 Poppins,Inter,sans-serif;color:var(--green-deep)}
+.story .role{font-size:15px;color:var(--muted);margin-top:2px}
+.story p{font-size:17px;line-height:1.55;margin-top:10px}
+.swipe{font-size:14px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+.bodynote{font-size:18px;font-weight:600;color:var(--ink);max-width:30ch;margin-left:auto;margin-right:auto}
+@media (min-width:720px){.carousel{display:grid;grid-template-columns:1fr 1fr;overflow:visible;margin-left:0;margin-right:0;padding:6px 0 10px}.story{max-width:none}.swipe{display:none}}
+
+/* ADVISER */
+.face{width:148px;height:148px;border-radius:50%;overflow:hidden;margin:0 auto;border:6px solid #fff;box-shadow:0 16px 36px -14px rgba(21,32,28,.5);background:var(--tint)}
+.face img{width:100%;height:100%;object-fit:cover;object-position:50% 0;transform:scale(1.9);transform-origin:50% 15%}
+.chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.chip{font:600 14px/1.3 Inter,sans-serif;background:#fff;border:1px solid var(--line);color:var(--green);padding:9px 14px;border-radius:999px}
+.adv-lines{font-size:clamp(20px,5.2vw,23px);line-height:1.5;max-width:28ch;margin-left:auto;margin-right:auto}
+
+/* STEPS */
+.steps{position:relative;max-width:520px;margin:30px auto 0;padding-left:62px;text-align:left}
+.steps::before{content:"";position:absolute;left:19px;top:14px;bottom:26px;width:4px;background:var(--line);border-radius:4px}
+.steps .fill{position:absolute;left:19px;top:14px;width:4px;height:0;background:linear-gradient(var(--gold),var(--amber));border-radius:4px}
+.step{position:relative;padding-bottom:30px}
+.step:last-child{padding-bottom:0}
+.step .dot{position:absolute;left:-62px;top:0;width:42px;height:42px;border-radius:50%;background:#fff;border:3px solid var(--line);display:grid;place-items:center;font:700 18px Poppins,sans-serif;color:var(--muted);transition:background .4s,border-color .4s,color .4s,transform .4s}
+.step.on .dot{background:var(--green);border-color:var(--green);color:#fff;transform:scale(1.08)}
+.step h3{font-size:21px;line-height:1.3}
+.step p{font-size:17px;color:var(--muted);margin-top:4px}
+.leave{max-width:520px;margin:10px auto 0;text-align:left}
+.leave ul{list-style:none;display:grid;gap:12px;margin-top:14px}
+.leave li{display:flex;gap:12px;align-items:flex-start;font-size:18px;line-height:1.45}
+.leave li::before{content:"";flex:none;width:26px;height:26px;border-radius:50%;background:var(--green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/16px no-repeat;margin-top:1px}
+
+/* FOOTER + STICKY */
+.foot{background:#0E1A16;color:rgba(255,255,255,.78);padding:40px 0 120px}
+.foot p{font-size:14px;line-height:1.6}
+.foot p+p{margin-top:12px}
+.foot .id{color:#fff;font-weight:600}
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:40;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);backdrop-filter:blur(8px);box-shadow:0 -10px 30px -12px rgba(21,32,28,.35);transform:translateY(120%);visibility:hidden;transition:transform .35s ease,visibility 0s linear .35s;display:flex;flex-direction:column;align-items:center}
+.sticky.show{transform:none;visibility:visible;transition-delay:0s}
+.sticky .btn{width:100%;max-width:520px;min-height:56px}
+.sticky .note{margin-top:6px;font-size:14px}
+
+@media (min-width:720px){.sticky{display:none}.foot{padding-bottom:40px}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;transition-delay:0s!important}
+  .seg.work{clip-path:inset(0 50% 0 0)}.seg.cpf{opacity:1;transform:none}.seg.gap{opacity:1}.gaplabel{opacity:1}
+  .blk.cpf{opacity:1;transform:none}.blk.si{opacity:1;transform:none}.ext{opacity:1}.legend div{opacity:1}
+  .badge .arc{stroke:var(--amber);stroke-dashoffset:0}
+}
+</style>
+<noscript><style>.reveal{opacity:1;transform:none}.seg.work{clip-path:inset(0 50% 0 0)}.seg.cpf{opacity:1;transform:none}.seg.gap{opacity:1}.gaplabel{opacity:1}.blk.cpf{opacity:1;transform:none}.blk.si{opacity:1;transform:none}.ext{opacity:1}.legend div{opacity:1}.badge .arc{stroke:#E39A2D}</style></noscript>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div id="progress" aria-hidden="true"></div>
+<div class="top">Raphael Kang</div>
+<main id="main">
+
+<!-- 1 HERO -->
+<section class="screen hero" id="hero">
+  <div class="wrap">
+    <p class="eyebrow reveal">FOR SINGAPOREANS AGED 50 TO 60</p>
+    <h1 class="reveal" style="--d:.08s">Planned for 65.<br>Tired at 60.</h1>
+    <div class="portrait reveal" style="--d:.16s">
+      <img src="assets/hero-portrait-raphael.jpg" alt="Raphael Kang, financial adviser representative" width="560" height="700" fetchpriority="high">
+      <div class="badge" id="badge" role="img" aria-label="Age counting down from 65 to 60">
+        <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="bg" cx="60" cy="60" r="52"/><circle class="arc" cx="60" cy="60" r="52"/></svg>
+        <div class="num"><span id="heroAge">60</span><small>Your age</small></div>
+      </div>
+    </div>
+    <p class="lead reveal" style="--d:.24s;margin-top:34px">CPF LIFE can start at 65.<br>What pays you from 60?</p>
+    <p class="adviser-line reveal" style="--d:.3s"><b>Raphael Kang</b> · Financial Adviser Representative</p>
+    <div class="cta-block reveal" style="--d:.36s"><a class="btn" href="#gap" id="seeGap">See My Gap</a></div>
+    <div class="proof reveal" style="--d:.42s">
+      <div class="faces" aria-hidden="true">
+        <img src="assets/janice-foo-with-raphael.jpg" alt="" style="object-position:70% 40%" loading="lazy">
+        <img src="assets/amar-sharma-with-raphael.jpg" alt="" style="object-position:30% 40%" loading="lazy">
+        <img src="assets/amelia-khoo-with-raphael.jpg" alt="" style="object-position:30% 40%" loading="lazy">
+      </div>
+      <div><q>He is able to break it down in simple terms for me to understand.</q><small>Daniel See, client</small></div>
+    </div>
+    <span class="scrollcue" aria-hidden="true"></span>
+  </div>
+</section>
+
+<!-- 2 THE GAP -->
+<section class="screen bg-white" id="gap">
+  <div class="wrap">
+    <p class="eyebrow reveal">THE YEARS NOBODY PLANS FOR</p>
+    <h2 class="reveal" style="--d:.06s">By 60, many people feel ready to stop.</h2>
+    <p class="lead reveal" style="--d:.12s">Stop at 60 and CPF LIFE is still 5&nbsp;years away.</p>
+    <div class="gantt" id="gantt" role="img" aria-label="Timeline from age 55 to 75. Work until 60, then 5 years with no monthly income, then CPF LIFE from 65.">
+      <p class="axiscap" aria-hidden="true">Your age</p>
+      <div class="axis" aria-hidden="true">
+        <span class="tick" style="left:0">55</span><span class="tick" style="left:25%">60</span><span class="tick" style="left:50%">65</span><span class="tick" style="left:75%">70</span><span class="tick" style="left:100%">75</span>
+      </div>
+      <div class="tl" aria-hidden="true">
+        <div class="seg work"><span>Work</span></div>
+        <div class="seg gap"></div>
+        <div class="seg cpf"><span>CPF LIFE</span></div>
+      </div>
+      <div class="gaplabel" aria-hidden="true">Before CPF LIFE starts</div>
+    </div>
+    <div class="reveal" style="--d:.1s">
+      <div class="bignum"><span id="gapYears">5</span><small>years</small></div>
+      <p class="biglabel">until CPF LIFE can pay you</p>
+    </div>
+    <div class="cta-block reveal"><a class="btn cta-inline" data-wa href="https://wa.me/6581886512?text=Hi%20Raphael%2C%20I%20saw%20your%20page%20and%20would%20like%20to%20plan%20my%20retirement%20income."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.7-1.2A9 9 0 1 0 12 3z"/></svg>Get My Income Map</a><p class="note">Opens WhatsApp with a message ready.</p></div>
+  </div>
+</section>
+
+<!-- 3 YOUR NUMBER -->
+<section class="screen bg-tint" id="number">
+  <div class="wrap">
+    <p class="eyebrow reveal">PUT YOUR OWN NUMBER ON IT</p>
+    <h2 class="reveal" style="--d:.06s">What would you want each month?</h2>
+    <div class="card reveal" style="--d:.12s" id="sliderCard">
+      <div class="ctl">
+        <label for="inc">Monthly income</label>
+        <div class="val" id="incVal">$3,000 a month</div>
+        <input type="range" id="inc" min="2000" max="8000" step="500" value="3000" aria-label="Monthly income you would want">
+      </div>
+      <div class="ctl">
+        <label for="age">Age you would stop</label>
+        <div class="val" id="ageVal">Stop at 60</div>
+        <input type="range" id="age" min="55" max="64" step="1" value="60" aria-label="Age you would stop work">
+      </div>
+      <div class="yb-wrap">
+        <div class="yb" id="yb" aria-hidden="true"></div>
+        <p class="yb-cap">Each block is 1 year before 65.</p>
+      </div>
+      <div class="total">
+        <div class="bignum" id="total">$180,000</div>
+        <p class="sumline" id="sumLine" aria-live="polite" aria-atomic="true">That is 5&nbsp;years at $3,000&nbsp;a&nbsp;month.</p>
+      </div>
+      <p class="fine" style="margin-top:14px">Simple maths. Months times income. Rising prices are not counted.</p>
+    </div>
+    <p class="bridge reveal">CPF LIFE can start at 65. So what pays you until then?</p>
+    <div class="cta-block reveal"><a class="btn cta-inline" data-wa href="https://wa.me/6581886512?text=Hi%20Raphael%2C%20I%20saw%20your%20page%20and%20would%20like%20to%20plan%20my%20retirement%20income."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.7-1.2A9 9 0 1 0 12 3z"/></svg>Get My Income Map</a><p class="note">Opens WhatsApp with a message ready.</p></div>
+  </div>
+</section>
+
+<!-- 4 HOW I PLAN IT -->
+<section class="screen on-dark" id="plan">
+  <div class="wrap">
+    <p class="eyebrow reveal">HOW I PLAN IT</p>
+    <h2 class="reveal" style="--d:.06s">CPF LIFE covers you from 65. I plan the years before it.</h2>
+    <div class="layers" id="layers" role="img" aria-label="Timeline from age 55 to 75. Your ERA covers the years from 60 to 65. CPF LIFE pays from 65, for life. A dashed band after 65 shows that how long and how much of your ERA continues depends on the products chosen.">
+      <p class="axiscap" aria-hidden="true">Your age</p>
+      <div class="axis" aria-hidden="true">
+        <span class="tick" style="left:0">55</span><span class="tick" style="left:25%">60</span><span class="tick" style="left:50%">65</span><span class="tick" style="left:75%">70</span><span class="tick" style="left:100%">75</span>
+      </div>
+      <div class="stack" aria-hidden="true">
+        <div class="ext"></div>
+        <div class="lrow"><div class="blk si"><span>ERA</span></div><div class="blk cpf"><span>CPF LIFE</span></div></div>
+      </div>
+      <div class="legend">
+        <div class="d1"><i class="k1"></i><span>CPF LIFE. Paid every month, for life.</span></div>
+        <div class="d2"><i class="k2"></i><span>Your ERA. For the years before 65.</span></div>
+        <div class="d3"><i class="k3"></i><span>How long and how much depends on the products chosen.</span></div>
+      </div>
+    </div>
+    <p class="plan-lines reveal"><span class="ln">I call it your <b>ERA</b>.</span><span class="ln sm">ERA stands for Enhanced Retirement Income.</span><span class="ln">We start with savings you already have.</span><span class="ln">We work out together what pays you each month from 60.</span></p>
+    <p class="riskline reveal">What you get depends on the products chosen. Investments can lose value.</p>
+    <div class="reveal">
+      <details>
+        <summary>Three CPF LIFE plans. Each pays you a different way.</summary>
+        <div class="dbody">
+          <p><strong>Basic:</strong> smaller monthly payouts, more left for your family. Payouts can fall in later years.</p>
+          <p><strong>Standard:</strong> the same amount every month. The most of the three to start.</p>
+          <p><strong>Escalating:</strong> starts lower, then grows 2% every year.</p>
+          <p>You can also start later, up to 70, for a higher payout. Up to 7% more for each year you wait.</p>
+        </div>
+      </details>
+      <details>
+        <summary>What goes into your ERA</summary>
+        <div class="dbody">
+          <p>I mix three types. How much of each depends on you.</p>
+          <p><strong>Annuity.</strong> Regular payouts, as set out in the contract.</p>
+          <p><strong>Market-linked.</strong> Regular premiums, invested in the market. Value can go up or down.</p>
+          <p><strong>Lump sum.</strong> One sum, invested for growth and income. Value can go up or down.</p>
+        </div>
+      </details>
+    </div>
+    <div class="cta-block reveal"><a class="btn inv cta-inline" data-wa href="https://wa.me/6581886512?text=Hi%20Raphael%2C%20I%20saw%20your%20page%20and%20would%20like%20to%20plan%20my%20retirement%20income."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.7-1.2A9 9 0 1 0 12 3z"/></svg>Get My Income Map</a><p class="note">Opens WhatsApp with a message ready.</p></div>
+  </div>
+</section>
+
+<!-- 5 WHAT MY CLIENTS SAY -->
+<section class="screen bg-white" id="clients">
+  <div class="wrap">
+    <p class="eyebrow reveal">CLIENTS</p>
+    <h2 class="reveal" style="--d:.06s">What my clients say.</h2>
+    <div class="reveal" style="--d:.1s">
+      <div class="yt" id="yt"><img src="assets/cheryl-poster.jpg" alt="" loading="lazy"><button class="play" id="ytBtn" type="button" aria-label="Play video: Cheryl, a client of Raphael Kang"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></button></div>
+      </div>
+    <figure class="qcard reveal" style="margin-top:22px"><img class="mono" src="assets/cheryl-poster.jpg" alt="" style="object-position:38% 40%"><blockquote>You have been very trustworthy and most of the time I get pretty fast responses from you.</blockquote><figcaption>Cheryl, client (on video)</figcaption></figure>
+    <figure class="qcard reveal"><span class="mono" aria-hidden="true">DS</span><blockquote>He is able to break it down in simple terms for me to understand.</blockquote><figcaption>Daniel See, client, Nov 2024</figcaption></figure>
+    <figure class="qcard reveal"><span class="mono" aria-hidden="true">SL</span><blockquote>I really appreciate Raphael’s honesty and earnestness.</blockquote><figcaption>Sarah Lew, client, Sep 2023</figcaption></figure>
+    <h3 class="reveal" style="margin-top:38px">Four stories, in my words.</h3>
+    <div class="carousel reveal" id="stories" role="region" tabindex="0" aria-label="Four client stories, swipe sideways">
+      <article class="story"><img src="assets/janice-foo-with-raphael.jpg" alt="Janice Foo with Raphael Kang" loading="lazy" style="object-position:68% 35%"><div class="sb"><h4>Janice Foo</h4><p class="role">Auditor</p><p>Janice wanted to stop by 60. She was not sure how, because CPF LIFE can start at 65. We set up her ERA.</p></div></article>
+      <article class="story"><img src="assets/amelia-khoo-with-raphael.jpg" alt="Amelia Khoo with Raphael Kang" loading="lazy" style="object-position:35% 35%"><div class="sb"><h4>Amelia Khoo</h4><p class="role">Retired</p><p>Amelia did not know what policies she had, or how she would retire. We found some she had forgotten. She has now retired.</p></div></article>
+      <article class="story"><img src="assets/amar-sharma-with-raphael.jpg" alt="Amar Sharma with Raphael Kang" loading="lazy" style="object-position:50% 30%"><div class="sb"><h4>Amar Sharma</h4><p class="role">Cargo Manager</p><p>Amar was not sure how much income he needed. Now he knows the monthly income he is planning for.</p></div></article>
+      <article class="story"><img src="assets/aileen-quek-with-raphael.jpg" alt="Aileen Quek with Raphael Kang and another person" loading="lazy" style="object-position:50% 30%"><div class="sb"><h4>Aileen Quek</h4><p class="role">Client</p><p>Aileen’s policies were all over the place. We reorganised them. She has retired, and her income now comes from several sources.</p></div></article>
+    </div>
+    <p class="swipe reveal" aria-hidden="true">Swipe for more</p>
+    <p class="bodynote reveal">I chose these stories. They may not be typical. Your result may be different.</p>
+    <div class="cta-block reveal"><a class="btn cta-inline" data-wa href="https://wa.me/6581886512?text=Hi%20Raphael%2C%20I%20saw%20your%20page%20and%20would%20like%20to%20plan%20my%20retirement%20income."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.7-1.2A9 9 0 1 0 12 3z"/></svg>Get My Income Map</a><p class="note">Opens WhatsApp with a message ready.</p></div>
+  </div>
+</section>
+
+<!-- 6 YOUR ADVISER -->
+<section class="screen bg-tint" id="adviser">
+  <div class="wrap">
+    <p class="eyebrow reveal">YOUR ADVISER</p>
+    <div class="face reveal" style="--d:.06s"><img src="assets/hero-portrait-raphael.jpg" alt="Raphael Kang" width="560" height="700" loading="lazy"></div>
+    <h2 class="reveal" style="--d:.1s">I’m Raphael Kang.</h2>
+    <p class="adv-lines reveal" style="--d:.14s">First I look at the whole picture. What you earn, save, own and owe.</p>
+    <p class="adv-lines reveal" style="--d:.18s">Then I show you the numbers. You decide.</p>
+    <div class="chips reveal" style="--d:.22s"><span class="chip">Financial Adviser Representative</span><span class="chip">MAS RNF KSW300480744</span></div>
+    <div class="cta-block reveal"><a class="btn cta-inline" data-wa href="https://wa.me/6581886512?text=Hi%20Raphael%2C%20I%20saw%20your%20page%20and%20would%20like%20to%20plan%20my%20retirement%20income."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.7-1.2A9 9 0 1 0 12 3z"/></svg>Get My Income Map</a><p class="note">Opens WhatsApp with a message ready.</p></div>
+  </div>
+</section>
+
+<!-- 7 WHEN WE MEET -->
+<section class="screen bg-white" id="meet">
+  <div class="wrap">
+    <p class="eyebrow reveal">YOUR INCOME MAP</p>
+    <h2 class="reveal" style="--d:.06s">What happens when we meet.</h2>
+    <p class="lead reveal" id="freeLine">The first meeting is complimentary.</p>
+    <div class="steps" id="steps">
+      <div class="fill" id="fill"></div>
+      <div class="step"><span class="dot">1</span><h3>We talk first.</h3><p>Your family. Your goals.</p></div>
+      <div class="step"><span class="dot">2</span><h3>You bring your CPF app.</h3><p>That is all I need.</p></div>
+      <div class="step"><span class="dot">3</span><h3>We map your income, year by year.</h3><p>You see any gap, in dollars.</p></div>
+      <div class="step"><span class="dot">4</span><h3>If it helps, we set up your ERA.</h3><p>You take it home and decide at your own pace.</p></div>
+    </div>
+    <div class="card leave reveal">
+      <h3>You leave with three things.</h3>
+      <ul>
+        <li>What CPF LIFE could pay you each month.</li>
+        <li>Your gap, in dollars.</li>
+        <li>A written plan with your numbers.</li>
+      </ul>
+    </div>
+    <p class="lead reveal" id="zoomLine">We meet on Zoom.</p>
+    <div class="cta-block reveal"><a class="btn cta-inline" data-wa href="https://wa.me/6581886512?text=Hi%20Raphael%2C%20I%20saw%20your%20page%20and%20would%20like%20to%20plan%20my%20retirement%20income."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.7-1.2A9 9 0 1 0 12 3z"/></svg>Get My Income Map</a><p class="note">Opens WhatsApp with a message ready.</p></div>
+  </div>
+</section>
+
+<!-- 8 FINAL CTA -->
+<section class="screen on-dark" id="final">
+  <div class="wrap">
+    <h2 class="reveal">Want to see your own numbers?</h2>
+    <p class="lead reveal" style="--d:.06s">Message me. We will find a time.</p>
+    <div class="reveal" style="--d:.1s">
+      <blockquote class="q">Leave no stones unturned. That’s how detailed I would describe the session with Raphael on planning for my finances.</blockquote>
+      <p class="who">Patrick, client, Feb 2023</p>
+    </div>
+    <div class="cta-block reveal" style="--d:.14s"><a class="btn inv cta-inline" data-wa href="https://wa.me/6581886512?text=Hi%20Raphael%2C%20I%20saw%20your%20page%20and%20would%20like%20to%20plan%20my%20retirement%20income."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.7-1.2A9 9 0 1 0 12 3z"/></svg>Get My Income Map</a><p class="note">Opens WhatsApp with a message ready.</p></div>
+    <div class="cta-block reveal" style="--d:.18s;gap:6px">
+      <a class="btn line" href="tel:+6581886512">Call +65 8188 6512</a>
+      <a class="link-btn" id="vcard" href="data:text/vcard;charset=utf-8,BEGIN%3AVCARD%0AVERSION%3A3.0%0AN%3AKang%3BRaphael%3B%3B%3B%0AFN%3ARaphael%20Kang%0ATITLE%3AFinancial%20Adviser%20Representative%0ATEL%3BTYPE%3DCELL%3A%2B6581886512%0AEND%3AVCARD" download="Raphael-Kang.vcf">Save contact</a>
+    </div>
+  </div>
+</section>
+
+</main>
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="wrap">
+    <p class="id">Kang Seng Wei, Raphael (Raphael Kang) · Financial Adviser Representative (RNF KSW300480744)</p>
+    <p>This advertisement has not been reviewed by the Monetary Authority of Singapore.</p>
+    <p>ERA (Enhanced Retirement Income) is the name I use for this planning approach. It is not a CPF account. It is not the CPF Enhanced Retirement Sum. It is not linked to or endorsed by CPF Board.</p>
+    <p>Investments are subject to investment risks including possible loss of the principal amount invested. The value of the products and the income from them may fall as well as rise.</p>
+    <p>Figures are examples only. They are not promises. CPF LIFE details follow 2026 CPF rules. Payouts depend on your balance, plan and start age.</p>
+    <p>Quotes are what clients said, word for word. Stories are in my words. Both differ from person to person and do not guide future results.</p>
+    <p>This page is an introduction. It is not advice for your situation. Talk to me before you decide.</p>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky" aria-hidden="true">
+  <a class="btn" data-wa href="https://wa.me/6581886512?text=Hi%20Raphael%2C%20I%20saw%20your%20page%20and%20would%20like%20to%20plan%20my%20retirement%20income." tabindex="-1" id="stickyBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.7-1.2A9 9 0 1 0 12 3z"/></svg>Get My Income Map</a>
+  <p class="note">Opens WhatsApp with a message ready.</p>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  // Raphael confirmed on 1 Oct 2026 that the first meeting is complimentary. House rule (Fahim): first meetings are always free unless stated.
+  var FIRST_MEETING_FREE = true;
+  // Fahim decided on 17 Sep 2026 that all of Raphael's meetings run on Zoom (.tmp/raphael-identity-audit/BUILD_STATE.md).
+  var MEET_ON_ZOOM = true;
+  var WA_NUMBER = '6581886512';
+  var RM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function $(s,r){return (r||document).querySelector(s)}
+  function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+  function fmt(n){return n.toLocaleString('en-US')}
+
+  $('#freeLine').hidden = !FIRST_MEETING_FREE;
+  $('#zoomLine').hidden = !MEET_ON_ZOOM;
+
+  // WhatsApp links. Default message, then the visitor's own slider numbers once they move a slider.
+  var waMsg = 'Hi Raphael, I saw your page and would like to plan my retirement income.';
+  function setWA(){ $$('a[data-wa]').forEach(function(a){ a.href = 'https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(waMsg); a.target='_blank'; a.rel='noopener'; }); }
+  setWA();
+
+  // Save contact (vCard)
+  var vc = ['BEGIN:VCARD','VERSION:3.0','N:Kang;Raphael;;;','FN:Raphael Kang','TITLE:Financial Adviser Representative','TEL;TYPE=CELL:+6581886512','END:VCARD'].join('\n');
+  $('#vcard').href = 'data:text/vcard;charset=utf-8,'+encodeURIComponent(vc);
+
+  // Reveal on scroll
+  var revealEls = $$('.reveal');
+  if(RM || !('IntersectionObserver' in window)){ revealEls.forEach(function(e){e.classList.add('in')}); }
+  else{
+    var rio = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); rio.unobserve(e.target);} }); },{threshold:.12,rootMargin:'0px 0px -5% 0px'});
+    revealEls.forEach(function(e){rio.observe(e)});
+  }
+  function onView(el,thr,cb){
+    if(!('IntersectionObserver' in window)){cb();return}
+    var o=new IntersectionObserver(function(es){ if(es[0].isIntersecting){ o.disconnect(); cb(); } },{threshold:thr});
+    o.observe(el);
+  }
+  function tween(el,from,to,dur,f,stop){
+    if(RM){ el.textContent=f(to); return; }
+    var t0=performance.now();
+    (function step(t){ if(stop && stop()) return; var p=Math.min(1,(t-t0)/dur), e=1-Math.pow(1-p,3); el.textContent=f(Math.round(from+(to-from)*e)); if(p<1) requestAnimationFrame(step); })(t0);
+  }
+
+  // HERO: 65 counts down to 60 inside a ring
+  var badge=$('#badge'), ageEl=$('#heroAge');
+  if(RM){ badge.classList.add('done'); }
+  else{
+    ageEl.textContent='65'; badge.classList.add('draw');
+    var a=65;
+    setTimeout(function tick(){
+      a--; ageEl.textContent=String(a); ageEl.classList.remove('bump'); void ageEl.offsetWidth; ageEl.classList.add('bump');
+      if(a>60){ setTimeout(tick,340); } else { badge.classList.add('done'); }
+    },1500);
+  }
+
+  // GAP timeline: full work bar, then it shrinks to 60 and the gap opens
+  var gantt=$('#gantt'), gy=$('#gapYears');
+  if(RM){ gantt.classList.add('s1','s2'); }
+  else{
+    onView(gantt,.55,function(){
+      var bn=gy.parentNode; gy.textContent='1'; bn.style.opacity='0'; bn.style.transition='opacity .4s ease';
+      gantt.classList.add('s1');
+      setTimeout(function(){ gantt.classList.add('s2'); bn.style.opacity='1'; tween(gy,1,5,900,String); },2100);
+    });
+  }
+
+  // SLIDERS
+  var inc=$('#inc'), age=$('#age'), touched=false, yb=$('#yb');
+  for(var i=0;i<10;i++){ yb.appendChild(document.createElement('i')); }
+  function render(pop){
+    var m=+inc.value, s=+age.value, yrs=65-s, total=m*12*yrs;
+    $('#incVal').textContent='$'+fmt(m)+' a month';
+    $('#ageVal').textContent='Stop at '+s;
+    inc.setAttribute('aria-valuetext','$'+fmt(m)+' a month'); age.setAttribute('aria-valuetext','Stop at '+s);
+    inc.style.setProperty('--p',((m-2000)/6000*100)+'%');
+    age.style.setProperty('--p',((s-55)/9*100)+'%');
+    $$('i',yb).forEach(function(b,ix){ b.classList.toggle('on', ix>=10-yrs); });
+    $('#sumLine').textContent='That is '+yrs+'\u00a0year'+(yrs===1?'':'s')+' at $'+fmt(m)+'\u00a0a\u00a0month.';
+    var t=$('#total'); t.textContent='$'+fmt(total);
+    if(pop && !RM){ t.classList.remove('pop'); void t.offsetWidth; t.classList.add('pop'); }
+    if(touched){ waMsg='Hi Raphael, I saw your page. I want about $'+fmt(m)+' a month from age '+s+'. Can we talk?'; setWA(); }
+  }
+  render(false);
+  inc.addEventListener('input',function(){touched=true;render(true)});
+  age.addEventListener('input',function(){touched=true;render(true)});
+  onView($('#sliderCard'),.45,function(){
+    if(RM) return;
+    var t=$('#total'), m=+inc.value, yrs=65-(+age.value), end=m*12*yrs;
+    tween(t,0,end,1300,function(n){return '$'+fmt(n)},function(){return touched});
+    setTimeout(function(){ render(false); },1400);
+  });
+
+  // LAYERS: floor, then my plan, then the dashed layer
+  var layers=$('#layers');
+  if(RM){ layers.classList.add('l1','l2','l3'); }
+  else{
+    onView(layers,.5,function(){
+      layers.classList.add('l1');
+      setTimeout(function(){layers.classList.add('l2')},1300);
+      setTimeout(function(){layers.classList.add('l3')},2400);
+    });
+  }
+
+  // YouTube: load the player only when tapped
+  $('#ytBtn').addEventListener('click',function(){
+    $('#yt').innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/cqbHtjjL-TU?autoplay=1&rel=0" title="Cheryl, a client of Raphael Kang" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+  },{once:true});
+
+  // STEPS: the line fills as you scroll and the dots light up
+  var steps=$('#steps'), fill=$('#fill'), stepEls=$$('.step',steps);
+  function updSteps(){
+    var r=steps.getBoundingClientRect(), vh=window.innerHeight;
+    var total=r.height-40;
+    var p=RM?1:Math.max(0,Math.min(1,(vh*0.62-r.top-14)/total));
+    fill.style.height=(p*total)+'px';
+    stepEls.forEach(function(el){ el.classList.toggle('on', el.offsetTop+20 <= p*total+14); });
+  }
+
+  // Progress bar + sticky CTA
+  var prog=$('#progress'), sticky=$('#sticky'), hero=$('#hero'), inl=new Set(), heroGone=false;
+  function syncSticky(){ var show=heroGone && inl.size===0; sticky.classList.toggle('show',show); sticky.setAttribute('aria-hidden',show?'false':'true'); $('#stickyBtn').tabIndex=show?0:-1; }
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){ heroGone=!es[0].isIntersecting; syncSticky(); },{threshold:0}).observe(hero);
+    var cio=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.intersectionRatio>=.4) inl.add(e.target); else inl.delete(e.target); }); syncSticky(); },{threshold:[0,.4,.6,1]});
+    $$('.cta-inline').forEach(function(b){cio.observe(b)});
+  }
+  var ticking=false;
+  function onScroll(){
+    if(ticking) return; ticking=true;
+    requestAnimationFrame(function(){
+      var h=document.documentElement; var max=h.scrollHeight-window.innerHeight;
+      prog.style.width=(max>0?Math.min(100,window.scrollY/max*100):0)+'%';
+      updSteps(); ticking=false;
+    });
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',onScroll);
+  onScroll();
+})();
+</script>
+</body>
+</html>
